@@ -1,8 +1,10 @@
 import pandas as pd
 import random
+import time
 
+filename = r'C:\Users\aidan\Downloads\US_Accidents_Project-main\US_Accidents_Project-main\US_accidents.csv'
 criteria = ['ID', 'Severity', 'State', 'Temperature(F)']
-sizeOfRes = 30
+sizeOfRes = 5000
 
 
 def createResDf(reservoir, df, k):
@@ -25,7 +27,7 @@ def selectKItems(stream, n, k):
     return reservoir
 
 if __name__ == "__main__":
-        filename = r'C:\Users\aidan\Downloads\US_Accidents_Project-main\US_Accidents_Project-main\US_accidents.csv'
+        start_time = time.time()
         data = pd.read_csv(filename)
         df = pd.DataFrame(data, columns=criteria)
 
@@ -35,7 +37,11 @@ if __name__ == "__main__":
         k = sizeOfRes
         reservoir = selectKItems(stream, n, k)
         resDf = createResDf(reservoir, df, k)
+        
         print("Our new reservoir:")
         print(resDf)
+        print("Ran in %s seconds." % (time.time() - start_time))
+
 
         
+
